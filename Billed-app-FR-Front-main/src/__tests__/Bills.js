@@ -13,37 +13,10 @@ import router from "../app/Router.js";
 import {ROUTES} from '../constants/routes'
 import store from '../__mocks__/store.js';
 
-// describe("Given I am connected as an employee", () => {
-//   describe("When I am on Bills Page", () => {
-//     test("Then bill icon in vertical layout should be highlighted", async () => {
 
-//       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
-//       window.localStorage.setItem('user', JSON.stringify({
-//         type: 'Employee'
-//       }))
-//       const root = document.createElement("div")
-//       root.setAttribute("id", "root")
-//       document.body.append(root)
-//       router()
-//       window.onNavigate(ROUTES_PATH.Bills)
-//       await waitFor(() => screen.getByTestId('icon-window'))
-//       const windowIcon = screen.getByTestId('icon-window')
-//       //to-do write expect expression
-
-//     })
-//     test("Then bills should be ordered from earliest to latest", () => {
-//       document.body.innerHTML = BillsUI({ data: bills })
-//       const dates = screen.getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i).map(a => a.innerHTML)
-//       const antiChrono = (a, b) => ((a < b) ? 1 : -1)
-//       const datesSorted = [...dates].sort(antiChrono)
-//       expect(dates).toEqual(datesSorted)
-//     })
-//   })
-// })
-
-describe("Employee View on Bills Page", () => {
-  describe("When accessing the Bills Page", () => {
-    test("The bill icon in the vertical layout should be highlighted", async () => {
+describe("Given I am connected as an employee", () => {
+  describe("When I am on Bills Page", () => {
+    test("Then the bill icon in the vertical layout should be highlighted", async () => {
 
       Object.defineProperty(window, 'localStorage', {
         value: localStorageMock
@@ -87,9 +60,9 @@ describe("Employee View on Bills Page", () => {
 })
 
 
-describe('Employee Bill Data Retrieval',()=>{
-  describe('When navigating to the Bill Page',()=>{
-   test('Fetching bills should return bill data', () => {
+describe('Given I am connected as an employee',()=>{
+  describe('When I am on Bill Page',()=>{
+   test('Then fetching bills should return bill data', () => {
      const onNavigate = (pathname) => {
        document.body.innerHTML = ROUTES({ pathname })
      }
@@ -148,7 +121,7 @@ describe("When I am on the Bills page but receive a backend error message", () =
 });
 
 describe("When there are bills on the Bill page", () => {
-  test("An icon-eye should be displayed", () => {
+  test("Then an icon-eye should be displayed", () => {
     // Render BillPage with bill data
     document.body.innerHTML = BillsUI({data: bills});
     
@@ -161,7 +134,7 @@ describe("When there are bills on the Bill page", () => {
 
 describe('Given I am an employee', () => {
   describe('When I navigate to the Bill page', () => {
-    test('When I click on the "New Bill" button, a modal should open', () => {
+    test('Then when I click on the "New Bill" button, a modal should open', () => {
       // Set up the initial conditions and render UI
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({
@@ -219,11 +192,11 @@ describe('Given I am an employee', () => {
 });
 
 
-//test d'integration
-describe('Integration Test: Employee Access to Bill Details', ()=>{
+// test d'integration
+describe('Integration Test: Given the employee Access to Bill Details', ()=>{
   describe('When navigating to the Bill page', ()=>{
 
-    test('Clicking on the eye icon should open a modal with bill details', async()=>{
+    test('THen clicking on the eye icon should open a modal with bill details', async()=>{
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({pathname})
       }
@@ -257,9 +230,9 @@ describe('Integration Test: Employee Access to Bill Details', ()=>{
 })
 
 //test integration GET
-describe('Employee Navigation to Bill Page',()=>{
+describe('Given the employee navigate to Bill Page',()=>{
   describe('When navigating to the Bill page',()=>{
-    test("Fetching bills from mock API GET", async () => {
+    test("Then fetching bills from mock API GET", async () => {
 
       localStorage.setItem("user", JSON.stringify({ type: "Employee", email: "a@a" }));
       const root = document.createElement("div")

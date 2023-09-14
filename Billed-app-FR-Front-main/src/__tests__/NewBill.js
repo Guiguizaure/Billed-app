@@ -28,10 +28,10 @@ Object.defineProperty(window, 'LocalStorage', {value: localStorageMock})
 window.localStorage.setItem('user', JSON.stringify({type: 'Employee'}))
 
 // Test cases for NewBill Page
-describe("Employee on NewBill Page", () => {
+describe("Given the employee is on NewBill Page", () => {
   // Test rendering of NewBill Page
   describe('When accessing the NewBill Page', ()=>{
-    test('The NewBill form should be rendered', ()=>{
+    test('Then the NewBill form should be rendered', ()=>{
       const html = NewBillUI()
       document.body.innerHTML = html
       //to-do write assertion
@@ -41,8 +41,8 @@ describe("Employee on NewBill Page", () => {
 })
 
 // Test file upload and file extension validation
-describe('When uploading an image file on NewBill Page',()=>{
-  describe('When I upload an image file', ()=>{
+describe('Given the employee is on NewBill Page',()=>{
+  describe('When he uploads an image file', ()=>{
     test('The file extension should be correct',()=>{
       const newBill = new NewBill({
         document, onNavigate, store: null, localStorage: window.localStorage
@@ -71,7 +71,7 @@ describe('When uploading an image file on NewBill Page',()=>{
 
 // Test form submission and bill creation
 describe("When submitting a valid bill form on NewBill Page",()=>{
-  test('A bill should be created', async ()=>{
+  test('Then a bill should be created', async ()=>{
     document.body.innerHTML = NewBillUI()
     const newBill = new NewBill({
       document, onNavigate, store: null, localStorage:window.localStorage
@@ -91,9 +91,9 @@ describe("When submitting a valid bill form on NewBill Page",()=>{
 
 //integration 
 // Test case for creating a bill as an Employee
-describe("Employee Creating a Bill",()=>{
+describe("When an mployee is creating a Bill",()=>{
   describe("When submitting a valid bill form",()=>{
-    test('A bill should be created', async ()=>{
+    test('Then a bill should be created', async ()=>{
       // Render NewBill UI
       document.body.innerHTML = NewBillUI()
       const newBill = new NewBill({
@@ -144,8 +144,8 @@ describe("Employee Creating a Bill",()=>{
 })
 
 // Test case for handling file upload of PNG image
-describe("Handling PNG File Upload", () => {
-  test("Function handleChangeFile should be called", () => {
+describe("When handling PNG File Upload", () => {
+  test("Then function handleChangeFile should be called", () => {
     // Render NewBill UI
       const html = NewBillUI();
       document.body.innerHTML = html;
@@ -182,8 +182,8 @@ describe("Handling PNG File Upload", () => {
 
 
 // Test case for handling file upload of PDF
-describe("Handling PDF File Upload", () => {
-  test("Function handleChangeFile should be called", () => {
+describe("When handling PDF File Upload", () => {
+  test("Then the function handleChangeFile should be called", () => {
      // Render NewBill UI
       const html = NewBillUI();
       document.body.innerHTML = html;
