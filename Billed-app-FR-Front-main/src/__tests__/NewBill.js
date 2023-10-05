@@ -161,7 +161,7 @@ describe("When handling PNG File Upload", () => {
           localStorage: window.localStorage
       });
 
-      // Mock handleChangeFile functio
+      // Mock handleChangeFile function
       const handleChangeFile = jest.fn(newBill.handleChangeFile);
       const file = screen.getByTestId("file");
 

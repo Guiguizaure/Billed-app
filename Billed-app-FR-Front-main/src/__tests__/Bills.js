@@ -112,7 +112,7 @@ describe("When I am on the Bills page but receive a backend error message", () =
   test("Then the ErrorPage should be displayed", () => {
     // Render ErrorPage with backend error
     document.body.innerHTML = BillsUI({
-      error: 'some error message'
+      error: 'error message'
     });
     
     // Check for ErrorPage text
