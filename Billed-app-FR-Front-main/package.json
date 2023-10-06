@@ -9,8 +9,6 @@
       "./setup-jest.js"
     ],
     "collectCoverage": true,
-    "coverageReporters": ["lcov"],
-    "coverageDirectory": "./output/code-coverage/",
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/app/**",
