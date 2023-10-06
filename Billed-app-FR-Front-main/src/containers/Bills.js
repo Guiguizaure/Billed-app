@@ -40,6 +40,7 @@ export default class Bills {
             const bills = snapshot.sort((a, b) => (new Date(b.date) - new Date(a.date)))
               .map(doc => {
                 try {
+                  
                   return {
                     ...doc,
                     date: formatDate(doc.date),

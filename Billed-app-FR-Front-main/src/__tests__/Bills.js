@@ -42,20 +42,23 @@ describe("Given I am connected as an employee", () => {
       expect(windowIcon).toHaveClass('active-icon')
 
     })
-    test("Bills should be displayed in ascending order of dates", () => {
+    test("Bills should be displayed in descending order of dates", () => {
       // Load bills data into UI
       document.body.innerHTML = BillsUI({
-        data: bills
+          data: bills
       })
-
-      // Extract bill dates and sort them
-      const dates = screen.getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i).map(a => a.innerHTML)
-      const antiChrono = (a, b) => ((a < b) ? -1 : 1)
-      const datesSorted = [...dates].sort(antiChrono)
-
-      // Check if the displayed dates are in ascending order
-      expect(dates).toEqual(datesSorted)
-    })
+  
+      // Extract bill dates and sort them in descending order (like getBills does)
+      const dates = screen.getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i).map(a => a.innerHTML);
+      const chrono = (a, b) => (new Date(b) - new Date(a)); // sorting in descending order
+      const datesSorted = [...dates].sort(chrono);
+  
+      // Check if the displayed dates are in descending order
+      console.log('dates', dates);
+      console.log('datesSorted', datesSorted);
+      expect(dates).toEqual(datesSorted);
+  })
+  
   })
 })
 
