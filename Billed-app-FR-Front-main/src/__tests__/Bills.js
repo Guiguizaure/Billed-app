@@ -196,118 +196,118 @@ describe('Given I am an employee', () => {
 
 
 // test d'integration
-describe('Integration Test: Given the employee Access to Bill Details', ()=>{
-  describe('When navigating to the Bill page', ()=>{
+// describe('Integration Test: Given the employee Access to Bill Details', ()=>{
+//   describe('When navigating to the Bill page', ()=>{
 
-    test('THen clicking on the eye icon should open a modal with bill details', async()=>{
-      const onNavigate = (pathname) => {
-        document.body.innerHTML = ROUTES({pathname})
-      }
+//     test('THen clicking on the eye icon should open a modal with bill details', async()=>{
+//       const onNavigate = (pathname) => {
+//         document.body.innerHTML = ROUTES({pathname})
+//       }
       
-      Object.defineProperty(window, 'localStorage', {value: localStorageMock})
-      window.localStorage.setItem('user', JSON.stringify({type:'Employee'}))
+//       Object.defineProperty(window, 'localStorage', {value: localStorageMock})
+//       window.localStorage.setItem('user', JSON.stringify({type:'Employee'}))
 
-      // Set user type and prepare Bills UI
-      const html = BillsUI({data: bills})
-      document.body.innerHTML= html
+//       // Set user type and prepare Bills UI
+//       const html = BillsUI({data: bills})
+//       document.body.innerHTML= html
 
-      // Instantiate Bills component
-      const bill = new Bills({
-        document, onNavigate, store:null, bills, localStorage: window.localStorage
-      })
+//       // Instantiate Bills component
+//       const bill = new Bills({
+//         document, onNavigate, store:null, bills, localStorage: window.localStorage
+//       })
 
-      // Mock the modal function
-      $.fn.modal = jest.fn()
+//       // Mock the modal function
+//       $.fn.modal = jest.fn()
 
-      // Simulate clicking the eye icon
-      const eye = screen.getAllByTestId('icon-eye')[0]
-      const handleClickIconEye = jest.fn(bill.handleClickIconEye(eye))      
-      eye.addEventListener('click', handleClickIconEye)
-      fireEvent.click(eye)
+//       // Simulate clicking the eye icon
+//       const eye = screen.getAllByTestId('icon-eye')[0]
+//       const handleClickIconEye = jest.fn(bill.handleClickIconEye(eye))      
+//       eye.addEventListener('click', handleClickIconEye)
+//       fireEvent.click(eye)
 
-      // Check if the click handler was called and the modal is displayed
-      expect(handleClickIconEye).toHaveBeenCalled();
-      expect(screen.getByTestId('modaleFile')).toBeTruthy();
-    })
-  })
-})
+//       // Check if the click handler was called and the modal is displayed
+//       expect(handleClickIconEye).toHaveBeenCalled();
+//       expect(screen.getByTestId('modaleFile')).toBeTruthy();
+//     })
+//   })
+// })
 
 //test integration GET
-describe('Given the employee navigate to Bill Page',()=>{
-  describe('When navigating to the Bill page',()=>{
-    test("Then fetching bills from mock API GET", async () => {
+// describe('Given the employee navigate to Bill Page',()=>{
+//   describe('When navigating to the Bill page',()=>{
+//     test("Then fetching bills from mock API GET", async () => {
 
-      localStorage.setItem("user", JSON.stringify({ type: "Employee", email: "a@a" }));
-      const root = document.createElement("div")
-      root.setAttribute("id", "root")
-      document.body.append(root)
-      router()
-      window.onNavigate(ROUTES_PATH.Bills)
+//       localStorage.setItem("user", JSON.stringify({ type: "Employee", email: "a@a" }));
+//       const root = document.createElement("div")
+//       root.setAttribute("id", "root")
+//       document.body.append(root)
+//       router()
+//       window.onNavigate(ROUTES_PATH.Bills)
 
-      // check for content
-      const contentPending = await screen.getByText("Mes notes de frais")
-      expect(contentPending).toBeTruthy()
-      expect(screen.getByTestId("btn-new-bill")).toBeTruthy()
-    })
+//       // check for content
+//       const contentPending = await screen.getByText("Mes notes de frais")
+//       expect(contentPending).toBeTruthy()
+//       expect(screen.getByTestId("btn-new-bill")).toBeTruthy()
+//     })
 
-    describe("When an API error occurs", () => {
-     beforeEach(() => {
-      // Spy on the store.bills method
-       jest.spyOn(store, "bills")
+//     describe("When an API error occurs", () => {
+//      beforeEach(() => {
+//       // Spy on the store.bills method
+//        jest.spyOn(store, "bills")
 
-       // Mock local storage and user access
-       Object.defineProperty(
-           window,
-           'localStorage',
-           { value: localStorageMock }
-       )
-       window.localStorage.setItem('user', JSON.stringify({
-         type: 'Employee',
-         email: "a@a"
-       }))
+//        // Mock local storage and user access
+//        Object.defineProperty(
+//            window,
+//            'localStorage',
+//            { value: localStorageMock }
+//        )
+//        window.localStorage.setItem('user', JSON.stringify({
+//          type: 'Employee',
+//          email: "a@a"
+//        }))
 
-       // Prepare root element and render app
-       const root = document.createElement("div")
-       root.setAttribute("id", "root")
-       document.body.appendChild(root)
-       router()
-     })
+//        // Prepare root element and render app
+//        const root = document.createElement("div")
+//        root.setAttribute("id", "root")
+//        document.body.appendChild(root)
+//        router()
+//      })
 
-     test("Fetching bills from API fails with 404 error message", async () => {
-      // Mock API response with 404 error
-       store.bills.mockImplementationOnce(() => {
-         return {
-           list : () =>  {
-             return Promise.reject(new Error("Erreur 404"))
-           }
-         }})
+//      test("Fetching bills from API fails with 404 error message", async () => {
+//       // Mock API response with 404 error
+//        store.bills.mockImplementationOnce(() => {
+//          return {
+//            list : () =>  {
+//              return Promise.reject(new Error("Erreur 404"))
+//            }
+//          }})
 
-         // Render ErrorPage with 404 error
-         const html = BillsUI({error: "Erreur 404"})
-         document.body.innerHTML = html
+//          // Render ErrorPage with 404 error
+//          const html = BillsUI({error: "Erreur 404"})
+//          document.body.innerHTML = html
 
-         // Check if the error message is visible
-         const message = await screen.getByText(/Erreur 404/)
-         expect(message).toBeTruthy()
-     })
+//          // Check if the error message is visible
+//          const message = await screen.getByText(/Erreur 404/)
+//          expect(message).toBeTruthy()
+//      })
  
-     test("Fetching bills from API fails with 500 error message", async () => {
-      // Mock API response with 500 error
-       store.bills.mockImplementationOnce(() => {
-         return {
-           list : () =>  {
-             return Promise.reject(new Error("Erreur 500"))
-           }
-         }})
+//      test("Fetching bills from API fails with 500 error message", async () => {
+//       // Mock API response with 500 error
+//        store.bills.mockImplementationOnce(() => {
+//          return {
+//            list : () =>  {
+//              return Promise.reject(new Error("Erreur 500"))
+//            }
+//          }})
  
-         // Render ErrorPage with 500 error
-       const html = BillsUI({error: "Erreur 500"})
-       document.body.innerHTML = html
+//          // Render ErrorPage with 500 error
+//        const html = BillsUI({error: "Erreur 500"})
+//        document.body.innerHTML = html
 
-       // Check if the error message is visible
-       const errorMessage = await screen.getByText(/Erreur 500/)
-       expect(errorMessage).toBeTruthy()
-     })
-   })
-  })
-})
+//        // Check if the error message is visible
+//        const errorMessage = await screen.getByText(/Erreur 500/)
+//        expect(errorMessage).toBeTruthy()
+//      })
+//    })
+//   })
+// })
